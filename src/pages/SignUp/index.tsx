@@ -13,7 +13,7 @@ const SignUp:React.FC<SignUpProps> = () => {
     register,
   } = useForm<SignUpFormType>({
     defaultValues: {
-      email: '',
+      userID: '',
       password: '',
       name: '',
       confirmPassword: '',
@@ -36,11 +36,11 @@ const SignUp:React.FC<SignUpProps> = () => {
       >
         <Typography variant='h4'>Sign Up</Typography>
         <TextField
-          label='Email'
+          label='userID'
           variant='outlined'
-          autoComplete='email'
+          autoComplete='userID'
           fullWidth
-          {...register('email', {required: true})}
+          {...register('userID', {required: true})}
         />
         <TextField
           label='Name'

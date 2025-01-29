@@ -19,4 +19,8 @@ export const ROUTES = {
     path: '/books',
     title: 'Books',
   },
+  profilePage: {
+    path: '/profilepage',
+    title: 'Profile Page',
+  },
 }

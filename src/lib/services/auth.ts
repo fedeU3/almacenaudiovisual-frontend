@@ -4,8 +4,8 @@ import { SignUpDTO } from "../dto/SignUpDTO";
 
 export const httpGETAuth = () => axios.get('/auth');
 
-export const httpPOSTLogin = ({email, password}: LoginDTO) =>
-  axios.post('/auth/login', {email, password})
+export const httpPOSTLogin = ({userID, password}: LoginDTO) =>
+  axios.post('/auth/login', {userID, password})
 
-export const httpPOSTSignUp = ({name, email, password}: SignUpDTO) =>
-  axios.post('/auth/signup', {name, email, password})
+export const httpPOSTSignUp = ({name, userID, password}: SignUpDTO) =>
+  axios.post('/auth/signup', {name, userID, password})

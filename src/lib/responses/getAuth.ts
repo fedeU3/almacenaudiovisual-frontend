@@ -1,5 +1,5 @@
 export interface IGetAuthResponse {
-  email: string
+  userID: string
   id: string
   name: string
 }

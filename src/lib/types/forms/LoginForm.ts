@@ -1,4 +1,4 @@
 export type LogInFormType = {
-  email: string;
+  userID: string;
   password: string;
 };

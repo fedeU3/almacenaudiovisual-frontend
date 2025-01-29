@@ -13,7 +13,7 @@ const Login: React.FC<LoginProps> = () => {
     register,
   } = useForm<LogInFormType>({
     defaultValues: {
-      email: '',
+      userID: '',
       password: ''
     }
   })
@@ -34,11 +34,11 @@ const Login: React.FC<LoginProps> = () => {
       >
         <Typography variant='h4'>Login</Typography>
         <TextField
-          label='Email'
+          label='userID'
           variant='outlined'
-          autoComplete='email'
+          autoComplete='userID'
           fullWidth
-          {...register('email', {required: true})}
+          {...register('userID', {required: true})}
         />
         <TextField
           label='Password'
