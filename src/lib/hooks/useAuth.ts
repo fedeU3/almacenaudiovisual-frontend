@@ -4,8 +4,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { IGetAuthResponse } from "../responses/getAuth"
 import { LoginDTO } from "../dto/LoginDTO"
 import { SignUpDTO } from "../dto/SignUpDTO"
+import { useNavigate } from "react-router"
 
-export const useAuth = (onSuccessAuth: (token: string) => void) => {
+export const useAuth = () => {
+  const navigate = useNavigate();
+  const onSuccessAuth = (token: string) => {
+    localStorage.setItem('token', token);
+    navigate('/');
+  };
   const queryClient = useQueryClient();
   const {
     data: response,
@@ -13,27 +19,26 @@ export const useAuth = (onSuccessAuth: (token: string) => void) => {
     error,
   } = useQuery<AxiosResponse<IGetAuthResponse>, AxiosError>({
     queryKey: ['auth'],
-    queryFn: httpGETAuth,
+    queryFn: httpGETAuth
   });
+  const invalidateAuth = () => {
+    queryClient.invalidateQueries({
+      queryKey: ['auth'],
+      exact: true,
+      refetchType: 'all',
+    });
+  }
   const loginMutation = useMutation({
     mutationFn: (data: LoginDTO) => httpPOSTLogin(data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: ['auth'],
-        exact: true,
-        refetchType: 'all',
-      });
+      invalidateAuth();
       onSuccessAuth(data.data.token);
     },
   });
   const signUpMutation = useMutation({
     mutationFn: (data: SignUpDTO) => httpPOSTSignUp(data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: ['auth'],
-        exact: true,
-        refetchType: 'all',
-      });
+      invalidateAuth();
       onSuccessAuth(data.data.token);
     },
   });
@@ -42,6 +47,7 @@ export const useAuth = (onSuccessAuth: (token: string) => void) => {
     isLoading,
     error,
     loginMutation,
-    signUpMutation
+    signUpMutation,
+    invalidateAuth,
   }
 }

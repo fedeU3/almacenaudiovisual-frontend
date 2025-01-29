@@ -2,8 +2,10 @@ import { Drawer as MuiDrawer } from '@mui/material'
 import { styled, Theme, CSSObject } from '@mui/material/styles';
 import React from 'react'
 import DrawerList from './DrawerList'
+import { MenuList } from '../types/MenuList';
 
 type SideDrawerProps = {
+  menuList: MenuList;
 }
 
 const drawerWidth = 240;
@@ -55,6 +57,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
+  menuList,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
   const toggleDrawer = (newExpanded: boolean) => () => {
@@ -62,7 +65,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   };
   return (
     <Drawer variant='permanent' open={expanded} onMouseEnter={toggleDrawer(true)} onMouseLeave={toggleDrawer(false)}>
-      <DrawerList expanded={expanded} toggleDrawer={toggleDrawer}/>
+      <DrawerList menuList={menuList} expanded={expanded} toggleDrawer={toggleDrawer}/>
     </Drawer>
   )
 }

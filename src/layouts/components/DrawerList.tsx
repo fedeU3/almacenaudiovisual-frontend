@@ -1,17 +1,19 @@
 import { Box, Divider, List } from '@mui/material'
-
 import React from 'react'
-import { menuList } from '../constants/menuList'
 import { MenuItem } from './MenuItem'
+import { MenuList } from '../types/MenuList'
 
 type DrawerListProps = {
   expanded: boolean
   toggleDrawer: (open: boolean) => () => void
+  menuList: MenuList;
+  showAdminOnly?: boolean;
 }
 
 const DrawerList: React.FC<DrawerListProps> = ({
   expanded,
-  toggleDrawer
+  toggleDrawer,
+  menuList,
 }) => {
   return (
     <Box sx={{ width: 250, paddingTop: '60px' }} height={'100%'} role="presentation" onClick={toggleDrawer(false)}>

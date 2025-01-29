@@ -1,15 +1,11 @@
-import { AutoStories, Logout, Mail, SvgIconComponent } from '@mui/icons-material'
+import { AutoStories, Logout, Mail, Group } from '@mui/icons-material'
+import { MenuItem, MenuList } from '../types/MenuList'
 
-type MenuItem = {
-  label: string
-  path: string
-  Icon: SvgIconComponent
-}
-
-export const menuList = {
+export const menuList: MenuList = {
   top: [
-    { label: 'Home', path: '/', Icon: Mail },
-    { label: 'Books', path: '/books', Icon: AutoStories },
+    { label: 'Home', path: '/', Icon: Mail, activeOnly: true },
+    { label: 'Users', path: '/users', Icon: Group, adminOnly: true, activeOnly: true },
+    { label: 'Books', path: '/books', Icon: AutoStories, activeOnly: true },
   ],
   bottom: [
     { label: 'Log Out', path: '/logout', Icon: Logout },

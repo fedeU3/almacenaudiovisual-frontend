@@ -7,4 +7,7 @@ export const initialContextValue: AuthContextType = {
   signUp: async () => {
     throw new Error("AuthContext: signUp function is not implemented.");
   },
+  logout: async () => {
+    throw new Error("AuthContext: logout function is not implemented.");
+  },
 };

@@ -1,5 +1,11 @@
 export interface IGetAuthResponse {
-  userID: string
-  id: string
-  name: string
+  id: number;
+  userID: string;
+  password: string;
+  nombre: string;
+  apellido: string;
+  direccion: string;
+  rol: string;
+  esAdmin: boolean;
+  isActive: boolean;
 }
