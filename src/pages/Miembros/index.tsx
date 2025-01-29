@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -11,39 +11,16 @@ import {
   Typography,
   Alert,
 } from '@mui/material';
-import { useAuthContext } from '../../lib/hooks/contextHooks/useAuthContext';
-
-interface Member {
-  id: number;
-  nombre: string;
-  apellido: string;
-  direccion: string;
-  rol: string;
-  esAdmin: boolean;
-}
+import { useMembers } from '../../lib/hooks/useMembers';
 
 const MembersTable: React.FC = () => {
-  const { fetchWithAuth } = useAuthContext();
-  const [members, setMembers] = useState<Member[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    members,
+    isLoading,
+    error,
+  } = useMembers();
 
-  useEffect(() => {
-    const getMembers = async () => {
-      try {
-        const data = await fetchWithAuth('/api/miembros');
-        setMembers(data);
-      } catch (err: any) {
-        setError(err.message || 'Error al cargar los miembros');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getMembers();
-  }, [fetchWithAuth]);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
         <CircularProgress />
@@ -54,12 +31,12 @@ const MembersTable: React.FC = () => {
   if (error) {
     return (
       <Alert severity="error" style={{ marginTop: '2rem' }}>
-        {error}
+        An unexpected error ocourred
       </Alert>
     );
   }
 
-  if (members.length === 0) {
+  if (!members || members.length === 0) {
     return (
       <Typography variant="h6" style={{ textAlign: 'center', marginTop: '2rem' }}>
         No se encontraron miembros.
@@ -89,6 +66,7 @@ const MembersTable: React.FC = () => {
               <TableCell>{member.direccion}</TableCell>
               <TableCell>{member.rol}</TableCell>
               <TableCell>{member.esAdmin}</TableCell>
+              <TableCell>{member.isActive}</TableCell>
             </TableRow>
           ))}
         </TableBody>
