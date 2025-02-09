@@ -23,4 +23,8 @@ export const ROUTES = {
     path: '/miembros',
     title: 'Miembros',
   },
+  usuarios: {
+    path: '/usuario',
+    title: 'Usuario',
+  },
 }

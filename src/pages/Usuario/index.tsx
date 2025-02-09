@@ -3,12 +3,12 @@ import { useUser } from '../../lib/hooks/useUser'
 
 type Props = {}
 
-const User = (props: Props) => {
+const Books = (props: Props) => {
   const {
     books,
     isLoading,
     error,
-  } = useBooks();
+  } = useUser();
   if(!error && books && !isLoading){
     console.log(books[0]);
   }
