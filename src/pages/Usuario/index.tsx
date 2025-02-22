@@ -3,7 +3,7 @@ import { useUser } from '../../lib/hooks/useUser'
 
 type Props = {}
 
-const Books = (props: Props) => {
+const User  = (props: Props) => {
   const {
     books,
     isLoading,

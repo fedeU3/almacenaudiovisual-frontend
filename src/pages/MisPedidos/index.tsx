@@ -1,14 +1,14 @@
 import React from 'react'
-import { useBooks } from '../../lib/hooks/useBooks'
+import { useMyOrders } from '../../lib/hooks/useMyOrders'
 
 type Props = {}
 
-const Books  = (props: Props) => {
+const MyOrders = (props: Props) => {
   const {
     books,
     isLoading,
     error,
-  } = useBooks();
+  } = useMyOrders();
   if(!error && books && !isLoading){
     console.log(books[0]);
   }
@@ -17,4 +17,4 @@ const Books  = (props: Props) => {
   )
 }
 
-export default Books
+export default MyOrders
