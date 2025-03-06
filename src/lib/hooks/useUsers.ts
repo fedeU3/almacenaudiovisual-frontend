@@ -1,23 +1,23 @@
 import { useQuery } from "@tanstack/react-query"
-import { httpGETBooks } from "../services/books"
+import { httpGETUsers } from "../services/users"
 import { AxiosError, AxiosResponse } from "axios";
-import { IUserResponse } from "../responses/user";
+import { IUsersResponse } from "../responses/users";
 
-export const useBooks = ()=>{
+export const useUsers = ()=>{
   const {
     data: response,
     isLoading,
     error,
-  } = useQuery<AxiosResponse<Array<IUserResponse>>, AxiosError>({
-    queryKey: ['user'],
-    queryFn: httpGETBooks,
+  } = useQuery<AxiosResponse<Array<IUsersResponse>>, AxiosError>({
+    queryKey: ['users'],
+    queryFn: httpGETUsers,
   })
-  const { data: books } = response || {};
+  const { data: users } = response || {};
   // console.log("books: ", books);
   // console.log("isLoading: ", isLoading);
   // console.log("error?.data: ", error);
   return {
-    books,
+    users,
     isLoading,
     error,
   }
