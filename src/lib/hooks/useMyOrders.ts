@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
-import { httpGETBooks } from "../services/books"
+import { httpGETMyOrders } from "../services/myOrders"
 import { AxiosError, AxiosResponse } from "axios";
 import { IMyOrdersResponse } from "../responses/myOrders";
 
-export const useBooks = ()=>{
+export const useMyOrders = ()=>{
   const {
     data: response,
     isLoading,
     error,
   } = useQuery<AxiosResponse<Array<IMyOrdersResponse>>, AxiosError>({
     queryKey: ['MyOrders'],
-    queryFn: httpGETBooks,
+    queryFn: httpGETMyOrders,
   })
-  const { data: books } = response || {};
+  const { data: myOrders } = response || {};
   // console.log("books: ", books);
   // console.log("isLoading: ", isLoading);
   // console.log("error?.data: ", error);

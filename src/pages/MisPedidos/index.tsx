@@ -5,15 +5,15 @@ type Props = {}
 
 const MyOrders = (props: Props) => {
   const {
-    books,
+    myOrders,
     isLoading,
     error,
   } = useMyOrders();
-  if(!error && books && !isLoading){
-    console.log(books[0]);
+  if(!error && myOrders && !isLoading){
+    console.log(myOrders[0]);
   }
   return (
-    <div>Books</div>
+    <div>myOrders</div>
   )
 }
 
