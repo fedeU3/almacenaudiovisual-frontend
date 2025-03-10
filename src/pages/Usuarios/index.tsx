@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon, Save as SaveIcon } from "@mui/icons-material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useAuthContext } from "../../lib/hooks/contextHooks/useAuthContext";
 interface IUser {
   id: number;
   avatar: string;
@@ -91,6 +92,10 @@ const Usuario = () => {
 
   if (error) return <p>{error}</p>;
   if (!user) return <p>Cargando...</p>;
+
+  /*const AuthContext = useAuthContext();*/
+
+ /* AuthContext.user?;*/
 
   return (
     <Box sx={{ backgroundColor: "#080808", minHeight: "100vh", color: "#B0BEC5", pt: 8 }}>
