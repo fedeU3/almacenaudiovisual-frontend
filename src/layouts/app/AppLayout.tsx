@@ -1,10 +1,10 @@
-
-import React, { useMemo } from 'react'
-import NavBar from '../components/AppBar'
-import SideDrawer from '../components/SideDrawer'
-import { Box } from '@mui/material'
-import { menuList } from '../constants/menuList'
-import { useNavigate } from 'react-router'
+import React, { useMemo } from 'react';
+import NavBar from '../components/AppBar';
+import SideDrawer from '../components/SideDrawer';
+import Footer from '../components/Footer'; 
+import { Box } from '@mui/material';
+import { menuList } from '../constants/menuList';
+import { useNavigate, useLocation } from 'react-router';
 
 type AppLayoutProps = {
   children: React.ReactNode,
@@ -15,14 +15,17 @@ type AppLayoutProps = {
 
 const AppLayout: React.FC<AppLayoutProps> = ({children, currentPage, isAdmin, isActive}) => {
   const navigate = useNavigate();
-  const goTo = (url: string)=> () => {
+  const location = useLocation(); // Obtener la ubicación actual
+
+  const goTo = (url: string) => () => {
     navigate(url);
   }
+
   const menuItems = useMemo(() => {
-    if(isAdmin) {
+    if (isAdmin) {
       return { ...menuList };
     }
-    if(isActive) {
+    if (isActive) {
       return {
         top: menuList.top.filter(item => !item.adminOnly),
         bottom: menuList.bottom.filter(item => !item.adminOnly),
@@ -33,15 +36,18 @@ const AppLayout: React.FC<AppLayoutProps> = ({children, currentPage, isAdmin, is
       bottom: menuList.bottom.filter(item => !item.adminOnly && !item.activeOnly),
     };
   }, [isAdmin]);
+
   return (
     <Box id='layout'>
       <NavBar currentPage={currentPage} goTo={goTo} />
-      <SideDrawer menuList={menuItems}/>
+      <SideDrawer menuList={menuItems} />
       <Box sx={{ paddingTop: '65px', paddingLeft: '70px' }}>
         {children}
+        {/* Mostrar el footer solo si no es la página de login o logout */}
+        {!['/login', '/logout'].includes(location.pathname) && <Footer />}
       </Box>
     </Box>
   )
 }
 
-export default AppLayout
+export default AppLayout;
