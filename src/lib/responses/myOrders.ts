@@ -6,4 +6,4 @@ export interface IMyOrdersResponse {
   fechaHoraPactada: Date;
   fechaHoraDevolucion: Date;
   estado: string;
-  }
+}

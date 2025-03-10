@@ -33,15 +33,17 @@ const CreateOrder  = () => {
     error,
     isSuccess,
   } = useCreateOrders();
+
   useEffect(() => {
     if(isSuccess){
       notification.show({
         content: 'Pedido creado',
         severity: 'success',
       });
+      navigate(ROUTES.MisPedidos.path);
     }
-    navigate(ROUTES.MisPedidos.path);
   }, [isSuccess])
+
   useEffect(() => {
     if(error){
       notification.show({
@@ -50,6 +52,7 @@ const CreateOrder  = () => {
       });
     }
   }, [error]);
+
   const {
     equipos,
   } = useEquipos('disponibles');
@@ -100,7 +103,8 @@ const CreateOrder  = () => {
         />
       </Box>
       <Box>
-        <Select label='Equipo' {...register('idEquipo', { required: true })}>
+        <Typography sx={{mb: 1}} variant="subtitle2">Equipo</Typography>
+        <Select fullWidth label='Equipo' {...register('idEquipo', { required: true })}>
           {
             equipos?.map((equipo: {id: number, nombre: string}) => (
               <MenuItem key={equipo.id} value={equipo.id}>{equipo.nombre}</MenuItem>
