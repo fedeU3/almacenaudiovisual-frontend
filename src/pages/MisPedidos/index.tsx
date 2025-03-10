@@ -22,9 +22,9 @@ const MyOrders = (props: Props) => {
 
   const sortedOrders = myOrders?.slice().sort((a, b) => {
     if (sortOrder === 'asc') {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
+      return new Date(a.fechaHoraPedido).getTime() - new Date(b.fechaHoraPedido).getTime();
     } else {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+      return new Date(b.fechaHoraPedido).getTime() - new Date(a.fechaHoraPedido).getTime();
     }
   });
 
@@ -67,15 +67,15 @@ const MyOrders = (props: Props) => {
                 <Card sx={{ backgroundColor: "#1E2A38", color: "#B0BEC5" }}>
                   <CardContent>
                     <Typography variant="h6">Pedido ID: {order.id}</Typography>
-                    <Typography variant="body2">{order.date.toLocaleString()}</Typography>
-                    <Typography variant="body2">Items:</Typography>
+                    <Typography variant="body2">{order.fechaHoraPedido.toLocaleString()}</Typography>
+                    {/* <Typography variant="body2">Items:</Typography>
                     <ul>
                       {order.items.map((item: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined, idx: React.Key | null | undefined) => (
                         <li key={idx}>
                           <Typography variant="body2">{item}</Typography>
                         </li>
                       ))}
-                    </ul>
+                    </ul> */}
                     <Box display="flex" justifyContent="space-between" mt={2}>
                       <Button variant="contained" startIcon={<InfoIcon />} sx={{ backgroundColor: "#FF7043" }}>Más Información</Button>
                       <Button variant="contained" startIcon={<CancelIcon />} color="secondary">Cancelar pedido</Button>

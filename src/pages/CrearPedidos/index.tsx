@@ -33,15 +33,17 @@ const CreateOrder  = () => {
     error,
     isSuccess,
   } = useCreateOrders();
+
   useEffect(() => {
     if(isSuccess){
       notification.show({
         content: 'Pedido creado',
         severity: 'success',
       });
+      navigate(ROUTES.MisPedidos.path);
     }
-    navigate(ROUTES.MisPedidos.path);
   }, [isSuccess])
+
   useEffect(() => {
     if(error){
       notification.show({
@@ -50,6 +52,7 @@ const CreateOrder  = () => {
       });
     }
   }, [error]);
+
   const {
     equipos,
   } = useEquipos('disponibles');
