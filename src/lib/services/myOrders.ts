@@ -1,3 +1,3 @@
 import axios from "axios";
 
-export const httpGETMyOrders = () => axios.get('/myOrders');
+export const httpGETMyOrders = () => axios.get('/pedidos');

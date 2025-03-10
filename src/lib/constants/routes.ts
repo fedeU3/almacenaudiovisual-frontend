@@ -31,4 +31,8 @@ export const ROUTES = {
     path: '/MisPedidos',
     title: 'MisPedidos',
   },
+  createOrders: {
+    path: '/pedidos/create',
+    title: 'Crear Pedido',
+  },
 }

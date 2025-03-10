@@ -1,24 +1,19 @@
-import { useQuery } from "@tanstack/react-query"
-import { httpGETCreateOrders } from "../services/createOrders"
-import { AxiosError, AxiosResponse } from "axios";
-import {  } from "../responses/createOrders";
+import { useMutation } from "@tanstack/react-query"
+import { httpPOSTPedido } from "../services/pedidos"
 
 export const useCreateOrders = ()=>{
   const {
-    data: response,
-    isLoading,
+    mutate,
+    isPending: isLoading,
     error,
-  } = useQuery<AxiosResponse<Array<any>>, AxiosError>({
-    queryKey: ['orders'],
-    queryFn: httpGETCreateOrders,
+    isSuccess,
+  } = useMutation({
+    mutationFn: httpPOSTPedido,
   })
-  const { data: orders } = response || {};
-  // console.log("books: ", books);
-  // console.log("isLoading: ", isLoading);
-  // console.log("error?.data: ", error);
   return {
-    orders,
+    createOrder: mutate,
     isLoading,
     error,
+    isSuccess,
   }
 }

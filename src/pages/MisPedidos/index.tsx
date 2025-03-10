@@ -6,10 +6,13 @@ import InfoIcon from '@mui/icons-material/Info';
 import CancelIcon from '@mui/icons-material/Cancel';
 import SortIcon from '@mui/icons-material/Sort';
 import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '../../lib/constants/routes';
 
 type Props = {};
 
 const MyOrders = (props: Props) => {
+  const navigate = useNavigate();
   const { myOrders, isLoading, error } = useMyOrders();
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
@@ -47,7 +50,7 @@ const MyOrders = (props: Props) => {
           <Button variant="contained" sx={{ backgroundColor: "#FF7043", mr: 1 }} onClick={handleSortToggle} startIcon={<SortIcon />}>
             Ordenar {sortOrder === 'asc' ? 'Ascendente' : 'Descendente'}
           </Button>
-          <Button variant="contained" sx={{ backgroundColor: "#FF7043" }} startIcon={<AddIcon />}>
+          <Button variant="contained" sx={{ backgroundColor: "#FF7043" }} startIcon={<AddIcon />} onClick={() => navigate(ROUTES.createOrders.path)}>
             Crear nuevo pedido
           </Button>
         </Box>

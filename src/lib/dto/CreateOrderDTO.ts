@@ -1,8 +1,8 @@
 export interface CreatePedidoDTO {
-    idMiembro: number;
-    idEquipo?: number;  
-    fechaHoraPactada: string;
-    estado: string;
-    direccion: string;
-  }
+  idMiembro: number;
+  idEquipo?: number;
+  fechaHoraEntrega: string;
+  fechaHoraPactada: string;
+  direccion: string;
+}
   

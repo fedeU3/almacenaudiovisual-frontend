@@ -5,6 +5,8 @@ import axios from 'axios';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthProvider from '../contexts/AuthContext';
 import ViewProvider from '../contexts/ViewContext';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 type ProvidersProp = {
   children: React.ReactNode;
@@ -63,8 +65,10 @@ const Providers:React.FC<ProvidersProp> = ({children}) => {
           <BrowserRouter>
             <AuthProvider>
               <ViewProvider>
-                <CssBaseline />
-                {children}
+                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+                  <CssBaseline />
+                  {children}
+                </LocalizationProvider>
               </ViewProvider>
             </AuthProvider>
           </BrowserRouter>
