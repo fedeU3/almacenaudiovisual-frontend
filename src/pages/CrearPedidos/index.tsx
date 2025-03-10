@@ -103,7 +103,8 @@ const CreateOrder  = () => {
         />
       </Box>
       <Box>
-        <Select label='Equipo' {...register('idEquipo', { required: true })}>
+        <Typography sx={{mb: 1}} variant="subtitle2">Equipo</Typography>
+        <Select fullWidth label='Equipo' {...register('idEquipo', { required: true })}>
           {
             equipos?.map((equipo: {id: number, nombre: string}) => (
               <MenuItem key={equipo.id} value={equipo.id}>{equipo.nombre}</MenuItem>
