@@ -5,15 +5,12 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import { useMembers } from '../../lib/hooks/useMembers';
 import { useEquipos } from '../../lib/hooks/useEquipos';
 
-
-
-
 export default function Home() {
   const { members, isLoading, error } = useMembers();
   const { equipos } = useEquipos();
 
   return (
-    <Box sx={{minHeight: "100vh", color: "#B0BEC5" }}>
+    <Box sx={{minHeight: "100vh"}}>
       {/* Hero Section */}
       <Box sx={{ textAlign: "center", py: 5, background: "linear-gradient(to bottom, black, #2C3E50)" }}>
         <Typography variant="h3" fontWeight="bold">ALMACÉN AUDIOVISUAL</Typography>

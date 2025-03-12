@@ -29,7 +29,7 @@ const MyOrders = (props: Props) => {
   });
 
   return (
-    <Box sx={{ backgroundColor: "#080808", minHeight: "100vh", color: "#B0BEC5", pt: 8 }}>
+    <Box sx={{minHeight: "100vh", color: "#B0BEC5"}}>
       {/* Header de Pedidos */}
       <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: "100%", backgroundColor: "#151E26", p: 2 }}>
         <Typography variant="h5" mb={2}>Últimos Pedidos</Typography>
@@ -39,7 +39,7 @@ const MyOrders = (props: Props) => {
       </Box>
 
       {/* Buscar y Ordenar */}
-      <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: "100%", backgroundColor: "#080808", p: 2 }}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: "100%", p: 2 }}>
         <TextField
           variant="outlined"
           placeholder="Buscar"

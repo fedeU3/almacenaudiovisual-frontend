@@ -11,9 +11,10 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-import { Edit as EditIcon, Save as SaveIcon } from "@mui/icons-material";
+import { Edit as EditIcon, Save as SaveIcon, Delete as DeleteIcon } from "@mui/icons-material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useAuthContext } from "../../lib/hooks/contextHooks/useAuthContext";
+import FormularioEquipo from 'C:/Users/Usuario/Documents/GitHub/almacenaudiovisual-frontend/src/layouts/components/FormularioEquipo';
 interface IUser {
   id: number;
   avatar: string;
@@ -29,6 +30,13 @@ interface IUser {
 const fetchCurrentUser = async (): Promise<IUser> => {
   return new Promise((resolve) => {
     setTimeout(() => {
+      fetch('/api/usuarioActual')
+      .then(response => response.json())
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.error('Error al obtener el usuario:', error);
       resolve({
         id: 1,
         avatar: "PlaceholderProfile.jpg",
@@ -39,6 +47,7 @@ const fetchCurrentUser = async (): Promise<IUser> => {
         phone: "123-456-7890",
         email: "usuario@example.com",
         equipment: ["Cámara", "Micrófono", "Trípode"],
+      });
       });
     }, 1000);
   });
@@ -58,6 +67,7 @@ const Usuario = () => {
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState<IUser | null>(null);
+  const [showForm, setShowForm] = useState(false); 
 
   useEffect(() => {
     const loadUser = async () => {
@@ -72,6 +82,13 @@ const Usuario = () => {
     loadUser();
   }, []);
 
+  const handleDeleteEquipment = (index: number) => {
+    if (user) {
+      const updatedEquipment = [...user.equipment];
+      updatedEquipment.splice(index, 1);
+      setUser({ ...user, equipment: updatedEquipment });
+    }
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (formData) {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -98,7 +115,7 @@ const Usuario = () => {
  /* AuthContext.user?;*/
 
   return (
-    <Box sx={{ backgroundColor: "#080808", minHeight: "100vh", color: "#B0BEC5", pt: 8 }}>
+    <Box sx={{minHeight: "100vh", color: "#B0BEC5"}}>
       {/* Sección de Perfil */}
       <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: "100%", backgroundColor: "#151E26", p: 2 }}>
         <Typography variant="h5" mb={2}>Mi perfil</Typography>
@@ -230,35 +247,63 @@ const Usuario = () => {
         </Card>
       </Container>
       {/* Sección de Equipos */}
-      <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: "100%", backgroundColor: "#151E26", p: 2 }}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ width: "100%", backgroundColor: "#151E26", p: 2, mb: 2  }}>
         <Typography variant="h5" mb={2}>Mi Equipo</Typography>
         <IconButton color="inherit">
           <ArrowForwardIcon />
         </IconButton>
       </Box>
-      <Container sx={{ py: 2 }}>
-        <Grid container spacing={0}>
-          <Button variant="contained" fullWidth sx={{ backgroundColor: "#FF7043" }}>
-            Agregar Equipo
-          </Button>
-          <Button variant="contained" fullWidth sx={{ backgroundColor: "#FF7043" }}>
-            Eliminar Equipo
-          </Button>
+      <Grid container spacing={2} sx={{ mb: 2 }}>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ backgroundColor: "#FF7043" }}
+              onClick={() => setShowForm(true)}
+            >
+              Agregar Equipo
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ backgroundColor: "#D32F2F" }}
+              onClick={() => handleDeleteEquipment(user.equipment.length - 1)}
+              disabled={user.equipment.length === 0}
+            >
+              Eliminar Último Equipo
+            </Button>
+          </Grid>
         </Grid>
+
+        {showForm && (
+          <Grid item xs={12} sx={{ mb: 2 }}>
+            <FormularioEquipo onClose={() => setShowForm(false)} onAdd={function (): void {
+            throw new Error("Function not implemented.");
+          } } />
+          </Grid>
+        )}
+
         <Grid container spacing={2}>
           {user.equipment.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card sx={{ backgroundColor: "#2C3E50" }}>
-                <CardMedia component="img" height="140" src="PlaceholderEquipo.jpg" alt="Cámara" />
+              <Card sx={{ backgroundColor: "#2C3E50", position: "relative" }}>
+                <CardMedia component="img" height="140" src="PlaceholderEquipo.jpg" alt="Equipo" />
                 <CardContent>
                   <Typography variant="h6">{item}</Typography>
                   <Typography variant="subtitle1">Marca: placeholder</Typography>
+                  <IconButton
+                    sx={{ position: "absolute", top: 8, right: 8, color: "white" }}
+                    onClick={() => handleDeleteEquipment(index)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 </CardContent>
               </Card>
             </Grid>
           ))}
         </Grid>
-      </Container>
     </Box>
   );
 };
