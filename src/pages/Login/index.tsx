@@ -15,7 +15,7 @@ const Login: React.FC<LoginProps> = () => {
     defaultValues: {
       userID: '',
       password: '',
-      rememberMe: false, 
+      rememberMe: false, // Nuevo campo para "Recuérdame"
     }
   });
 

@@ -61,7 +61,6 @@ const CreateOrder  = () => {
     fechaHoraPactada,
   ] = watch(['fechaHoraEntrega', 'fechaHoraPactada']);
   const onSubmit = (data: CrearPedidoFromType) => {
-    console.log(data);
     if(
       !user?.id ||
       !data.fechaHoraEntrega ||
@@ -69,6 +68,7 @@ const CreateOrder  = () => {
     ) return;
     const body = {
       ...data,
+      idEquipo: [data.idEquipo],
       fechaHoraEntrega: data.fechaHoraEntrega?.toISOString(),
       fechaHoraPactada: data.fechaHoraPactada?.toISOString(),
       idMiembro: user?.id,
