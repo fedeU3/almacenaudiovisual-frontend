@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query"
 import { AxiosError, AxiosResponse } from "axios";
 import { httpGETEquipos } from "../services/equipos";
 
-export const useEquipos = (estado?: string) => {
+export const useEquipos = () => {
   const {
     data: response,
     isLoading,
     error,
   } = useQuery<AxiosResponse, AxiosError>({
-    queryKey: ['equipos', estado],
-    queryFn: ()=>httpGETEquipos(estado),
+    queryKey: ['equipos'],
+    queryFn: httpGETEquipos,
   })
   const { data: equipos } = response || {};
   return {

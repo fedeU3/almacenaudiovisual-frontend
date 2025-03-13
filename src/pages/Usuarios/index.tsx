@@ -14,7 +14,7 @@ import {
 import { Edit as EditIcon, Save as SaveIcon, Delete as DeleteIcon } from "@mui/icons-material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useAuthContext } from "../../lib/hooks/contextHooks/useAuthContext";
-import FormularioEquipo from 'C:/Users/Usuario/Documents/GitHub/almacenaudiovisual-frontend/src/layouts/components/FormularioEquipo';
+/*import FormularioEquipo from 'C:/Users/Usuario/Documents/GitHub/almacenaudiovisual-frontend/src/layouts/components/FormularioEquipo';*/
 interface IUser {
   id: number;
   avatar: string;

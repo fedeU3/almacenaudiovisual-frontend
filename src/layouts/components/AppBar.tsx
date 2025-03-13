@@ -33,7 +33,7 @@ const NavBar: React.FC<NavBarProps> = ({ goTo, currentPage }) => {
                   variant="contained"
                   sx={{ backgroundColor: '#B0BEC5', color: '#000', border: '1px solid #000',fontSize: '0.6rem', padding: '2px 4px', minWidth: 'auto'}}
                 >
-                  Alquilar Equipo
+                  Equipo
                 </Button>
                 <Button
                   onClick={goTo('/')}

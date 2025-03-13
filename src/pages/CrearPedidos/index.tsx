@@ -47,7 +47,7 @@ const CreateOrder  = () => {
   useEffect(() => {
     if(error){
       notification.show({
-        content: 'Error al crear pedido',
+        content: 'El equipo seleccionado ya está reservado en las fechas ingresadas.',
         severity: 'error',
       });
     }

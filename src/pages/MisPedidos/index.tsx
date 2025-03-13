@@ -8,6 +8,8 @@ import SortIcon from '@mui/icons-material/Sort';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../lib/constants/routes';
+import { useEquipos } from '../../lib/hooks/useEquipos';
+import { useOrdersEquipos } from '../../lib/hooks/useOrdersEquipos';
 
 type Props = {};
 
@@ -67,7 +69,12 @@ const MyOrders = (props: Props) => {
                 <Card sx={{ backgroundColor: "#1E2A38", color: "#B0BEC5" }}>
                   <CardContent>
                     <Typography variant="h6">Pedido ID: {order.id}</Typography>
-                    <Typography variant="body2">{order.fechaHoraPedido.toLocaleString()}</Typography>
+                    <Typography variant="body2">Fecha y hora en la que se realizo el pedido: {order.fechaHoraPedido.toLocaleString()}</Typography>
+                    <Typography variant="body2"> El pedido se entregara: {order.fechaHoraEntrega}</Typography>
+                    <Typography variant="body2"> El pedido se debe devolver: {order.fechaHoraPactada}</Typography>
+                    <Typography variant="body2">Equipos pedidos: Cámara Sony A7 </Typography>
+                    <Typography variant="body2">Estado del pedido: "Pendiente a aprobacion"  </Typography>
+
                     {/* <Typography variant="body2">Items:</Typography>
                     <ul>
                       {order.items.map((item: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined, idx: React.Key | null | undefined) => (
